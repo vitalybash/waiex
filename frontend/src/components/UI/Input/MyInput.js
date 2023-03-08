@@ -1,10 +1,9 @@
 import React from 'react';
+import './MyInput.css';
 
 const MyInput = () => {
   return (
-    <div>
-      
-    </div>
+    <input type="text" placeholder="Название профессии..." />
   );
 };
 

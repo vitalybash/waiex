@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: #686868;
 }
 
 body {
@@ -17,5 +18,4 @@ body {
 a {
     text-decoration: none;
     font-size: 1.2rem;
-    color: #686868;
 }

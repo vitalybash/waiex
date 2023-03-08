@@ -5,6 +5,9 @@ const Developers = () => {
   return (
     <section className="developers">
       <MyInput />
+      <div className="grid-container">
+
+      </div>
     </section>
   );
 };
