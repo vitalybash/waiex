@@ -1,13 +1,13 @@
 import React from 'react';
 import MyInput from "../components/UI/Input/MyInput";
+import DevelopersGrid from "../components/DevelopersGrid/DevelopersGrid";
+import data from '../data/data.json';
 
 const Developers = () => {
   return (
     <section className="developers">
       <MyInput />
-      <div className="grid-container">
-
-      </div>
+      <DevelopersGrid data={data} />
     </section>
   );
 };

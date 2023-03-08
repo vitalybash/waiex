@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "logo": "logo1.png",
+      "images": "1.png",
+      "description": "Разработка сайта на Python & Django/Flask/Fast Api",
+      "stack": [
+        "Django",
+        "Flask",
+        "Python",
+        "Fast API"
+      ]
+    }
+  ]
+}
