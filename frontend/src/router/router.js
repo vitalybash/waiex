@@ -1,9 +1,9 @@
-import Developers from "../pages/Developers";
+import Services from "../pages/Services";
 import Devop from "../pages/Devop";
 import { Navigate } from "react-router-dom";
 
 export const routes = [
-  {path: '/devops', element: <Developers />},
+  {path: '/services', element: <Services />},
   {path: '/devops/:id', element: <Devop />},
   {path: '*', element: <Navigate to="/devops" replace /> }
 ];

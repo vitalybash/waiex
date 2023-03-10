@@ -1,19 +1,18 @@
 import React from 'react';
 import "./Card.css";
 
-const Card = ({user}) => {
-  console.log("../../assets/" + user.image);
+const Card = ({service}) => {
   return (
     <div className="card">
-      <img src={require("../../assets/" + user.image)} />
+      <img src={require("../../assets/" + service.image)} />
       <div className="user-info">
         <div>
-          <p>{user.description}</p>
+          <p>{service.description}</p>
           <div className="stack">
-            {user.stack?.map(item => <div className="stack-item">{item}</div>)}
+            {service.stack?.map(item => <div className="stack-item">{item}</div>)}
           </div>
         </div>
-        <img src={require("../../assets/" + user.logo)} />
+        <img src={require("../../assets/" + service.logo)} />
       </div>
     </div>
   );

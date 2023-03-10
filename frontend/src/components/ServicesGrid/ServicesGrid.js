@@ -1,11 +1,11 @@
 import React from 'react';
 import Card from "../Card/Card";
-import "./DevelopersGrid.css";
+import "./ServicesGrid.css";
 
-const DevelopersGrid = ({data}) => {
+const DevelopersGrid = ({services}) => {
   return (
     <div className="grid-container">
-      {data.users?.map(user => <Card key={user.id} user={user} />)}
+      {services.map(service => <Card key={service.id} service={service} />)}
     </div>
   );
 };

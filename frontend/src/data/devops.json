@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "first_name": "Николай",
+      "second_name": "Пауков",
+      "age": 18,
+      "logo": "logo1.png",
+      "image": "1.png",
+      "description": "Николай Копытов, 18 лет Разрабатываю софт под Windows/Linux и IOS, сайты, боты и прочее. Имею опыт работы на Unity и Unreal Engine. Ведущий разработчик ООО “FET” python django",
+      "stack": [
+        "Django",
+        "Flask",
+        "Python",
+        "Next JS",
+        "Django"
+      ]
+    },
+    {
+      "id": 2,
+      "logo": "logo2.png",
+      "image": "2.png",
+      "description": "Разработка высокочастотных ботов на Binance API для торговле криптовалютой. Имею большой опыт работы в криптовалюте на богача из Великого Новгорода.",
+      "stack": []
+    },
+    {
+      "id": 3,
+      "logo": "logo3.png",
+      "image": "3.png",
+      "description": "Разработка высокочастотных ботов на Binance API для торговле криптовалютой. Имею большой опыт работы в криптовалюте на богача из Великого Новгорода.",
+      "stack": [
+      ]
+    },
+    {
+      "id": 4,
+      "logo": "logo4.png",
+      "image": "4.png",
+      "description": "Разработка сайта на Python & Django/Flask/Fast Api",
+      "stack": [
+        "Django",
+        "Flask",
+        "Fast API"
+      ]
+    }
+  ]
+}
