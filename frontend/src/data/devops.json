@@ -3,10 +3,10 @@
     {
       "id": 1,
       "first_name": "Николай",
-      "second_name": "Пауков",
+      "second_name": "Копытов",
       "age": 18,
       "logo": "logo1.png",
-      "image": "1.png",
+      "image": "profile1.png",
       "description": "Николай Копытов, 18 лет Разрабатываю софт под Windows/Linux и IOS, сайты, боты и прочее. Имею опыт работы на Unity и Unreal Engine. Ведущий разработчик ООО “FET” python django",
       "stack": [
         "Django",
