@@ -6,3 +6,12 @@
     width: 100%;
     border-radius: 0;
 }
+
+section {
+    margin-top: 6rem;
+    padding-inline: 1rem;
+}
+
+section h3 {
+    margin-bottom: 1rem;
+}

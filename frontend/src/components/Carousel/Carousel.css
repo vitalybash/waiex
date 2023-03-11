@@ -1,0 +1,49 @@
+.carouselContainer {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.carouselContainer button {
+    height: 30%;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    transform: translateY(-50%);
+    position: absolute;
+    z-index: 3;
+    font-size: 3.5rem;
+    border: none;
+    transition: all 0.3s linear;
+}
+
+.buttonLeft {
+    left: -100px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.carouselContainer:hover .buttonLeft {
+    left: 0;
+}
+
+.buttonRight {
+    right: -100px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.carouselContainer:hover .buttonRight {
+    right: 0;
+}
+
+.carousel {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    padding: 1rem 8px;
+}
+
+.carousel > div {
+    flex: 0 0 auto;
+}

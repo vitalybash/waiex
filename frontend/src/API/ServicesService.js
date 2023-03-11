@@ -6,15 +6,15 @@ export default class ServicesService {
   }
 
   static getByUserId(id) {
-    const services = services.services;
+    const servicesArr = services.services;
     const result = [];
-    for (let i = 0; i < services.length; i++) {
-      const service = services[i];
-      if (service.user_id == id) {
+    for (let i = 0; i < servicesArr.length; i++) {
+      const service = servicesArr[i];
+      if (service["user_id"] == id) {
         result.push(service);
       }
     }
 
-    return services;
+    return result;
   }
 }
