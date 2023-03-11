@@ -12,10 +12,15 @@ body {
 
 #root {
     margin-inline: auto;
-    max-width: 1000px;
+    max-width: 1400px;
 }
 
 a {
     text-decoration: none;
     font-size: 1.2rem;
+}
+
+.centered {
+    max-width: 1000px;
+    margin-inline: auto;
 }

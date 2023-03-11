@@ -11,7 +11,7 @@ const Services = () => {
   }, []);
 
   return (
-    <section className="developers">
+    <section className="services">
       <MyInput />
       <DevelopersGrid services={services} />
     </section>

@@ -2,13 +2,19 @@
     color: #000000;
 }
 
+.devop .user-info {
+    max-width: 1000px;
+    margin-inline: auto;
+}
+
 .profile-image {
     width: 100%;
     border-radius: 0;
+    margin-bottom: 4rem;
 }
 
 .user-info img {
-    margin-left: 8px;
+    margin-left: 2rem;
 }
 
 section {

@@ -3,7 +3,7 @@ import './MyInput.css';
 
 const MyInput = () => {
   return (
-    <input type="text" placeholder="Название профессии..." />
+    <input className="centered" type="text" placeholder="Название профессии..." />
   );
 };
 
