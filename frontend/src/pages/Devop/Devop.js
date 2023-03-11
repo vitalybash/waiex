@@ -6,15 +6,19 @@ import "./Devop.css";
 import { createName } from "../../utils/userNameCreater";
 import Carousel from "../../components/Carousel/Carousel";
 import Card from "../../components/Card/Card";
+import ReviewsService from "../../API/ReviewsService";
+import Review from "../../components/Review/Review";
 
 const Devop = () => {
   const params = useParams();
   const [user, setUser] = useState({});
   const [services, setServices] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     setUser(DevopsService.getById(params.id));
     setServices(ServicesService.getByUserId(params.id));
+    setReviews(ReviewsService.getByDevopId(params.id));
   }, []);
 
   return (
@@ -31,11 +35,23 @@ const Devop = () => {
             </div>
             <section>
               <h3>Услуги:</h3>
-              <div className="carousel-container">
+              <div>
                 <Carousel
                   elements={services}
                   elementReturner={(data) => {
                     return <Card key={data.id} service={data.element} />;
+                  }}
+                  elementWidth={500}
+                />
+              </div>
+            </section>
+            <section>
+              <h3>Отзывы:</h3>
+              <div>
+                <Carousel
+                  elements={reviews}
+                  elementReturner={(data) => {
+                    return <Review key={data.id} review={data.element} />;
                   }}
                   elementWidth={500}
                 />

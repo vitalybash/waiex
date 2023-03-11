@@ -7,7 +7,7 @@ const Services = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    setServices(ServicesService.getAll().services);
+    setServices(ServicesService.getAll());
   }, []);
 
   return (

@@ -2,7 +2,7 @@ import services from "../data/services.json";
 
 export default class ServicesService {
   static getAll() {
-    return services;
+    return services.services;
   }
 
   static getByUserId(id) {
