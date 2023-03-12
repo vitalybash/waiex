@@ -1,8 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser
 
-
-class Executor(models.Model):  # Модель исполнителя
-    avatar = models.ImageField(upload_to='avatar', default=None ,verbose_name='аватар пользователя')
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(default=None, verbose_name='Почта пользователя', unique=True)
+    password = models.CharField(default=None, max_length=1024)
+    avatar = models.ImageField(upload_to='avatar', default=None, verbose_name='аватар пользователя')
     name = models.CharField(max_length=256, default=None, verbose_name='Имя исполнителя')
     surname = models.CharField(max_length=256, default=None, verbose_name='Фамилия исполнителя')
     age = models.IntegerField(default=0, verbose_name='Возраст исполнителя')
@@ -13,9 +16,11 @@ class Executor(models.Model):  # Модель исполнителя
                                 verbose_name='Отзывы исполнителя', blank=True)
     reviews_count = models.IntegerField(default=0, verbose_name='Кол-во отзывов')
 
+    USERNAME_FIELD = 'email'
+
     def rating(self):
         """Функция подсчета рейтинга"""
-        queryset = self.reviews.all().aggregate(
+        queryset = self.reviews.objects.all().aggregate(
             rating=round(models.Sum('estimation') / self.reviews_count, 1))
         return float(queryset["rating"])
 

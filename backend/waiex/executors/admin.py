@@ -1,12 +1,7 @@
 from django.contrib import admin
-from .models import Executor, Reviews,Skill
-
+from .models import Reviews,Skill
 class SkillAdmin(admin.ModelAdmin):
     list_display = ['id', 'title',]
-
-
-class ExecutorAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name',]
 
 
 class ReviewsAdmin(admin.ModelAdmin):
@@ -14,5 +9,4 @@ class ReviewsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Skill, SkillAdmin)
-admin.site.register(Executor, ExecutorAdmin)
 admin.site.register(Reviews, ReviewsAdmin)
