@@ -11,7 +11,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     avatar = models.ImageField(upload_to='avatar', verbose_name='аватар пользователя')
     name = models.CharField(max_length=256, default='', verbose_name='Имя исполнителя')
     surname = models.CharField(max_length=256, default='', verbose_name='Фамилия исполнителя')
-    skills = models.ForeignKey('Skill', blank=True, on_delete=models.CASCADE, verbose_name='карточка',
+    skills = models.ForeignKey('Skill', blank=True, null=True ,on_delete=models.CASCADE, verbose_name='карточка',
                                related_name='skill')
     age = models.IntegerField(default=0, verbose_name='Возраст исполнителя')
     info = models.CharField(max_length=1024, default='', verbose_name='Общая информация о исполнителе')
