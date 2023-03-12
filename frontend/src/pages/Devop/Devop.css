@@ -1,0 +1,27 @@
+.devop * {
+    color: #000000;
+}
+
+.devop .user-info {
+    max-width: 1000px;
+    margin-inline: auto;
+}
+
+.profile-image {
+    width: 100%;
+    border-radius: 0;
+    margin-bottom: 4rem;
+}
+
+.user-info img {
+    margin-left: 2rem;
+}
+
+section {
+    margin-top: 6rem;
+    padding-inline: 1rem;
+}
+
+section h3 {
+    margin-bottom: 1rem;
+}

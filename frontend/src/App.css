@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #686868;
+}
+
+body {
+    font-family: 'Microsoft JhengHei UI', sans-serif;
+    padding: 4rem 2rem;
+}
+
+#root {
+    margin-inline: auto;
+    max-width: 1400px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.centered {
+    max-width: 1000px;
+    margin-inline: auto;
+}

@@ -1,0 +1,46 @@
+{
+  "services": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "logo": "logo1.png",
+      "image": "1.png",
+      "description": "Разработка сайта на Python & Django/Flask/Fast Api",
+      "stack": [
+        "Django",
+        "Flask",
+        "Python",
+        "Next JS"
+      ]
+    },
+    {
+      "id": 2,
+      "user_id": 1,
+      "logo": "logo1.png",
+      "image": "2.png",
+      "description": "Разработка высокочастотных ботов на Binance API для торговле криптовалютой. Имею большой опыт работы в криптовалюте на богача из Великого Новгорода.",
+      "stack": []
+    },
+    {
+      "id": 3,
+      "user_id": 1,
+      "logo": "logo1.png",
+      "image": "3.png",
+      "description": "Разработка высокочастотных ботов на Binance API для торговле криптовалютой. Имею большой опыт работы в криптовалюте на богача из Великого Новгорода.",
+      "stack": [
+      ]
+    },
+    {
+      "id": 4,
+      "user_id": 1,
+      "logo": "logo1.png",
+      "image": "4.png",
+      "description": "Разработка сайта на Python & Django/Flask/Fast Api",
+      "stack": [
+        "Django",
+        "Flask",
+        "Fast API"
+      ]
+    }
+  ]
+}
