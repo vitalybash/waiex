@@ -1,0 +1,18 @@
+header {
+    margin-bottom: 4rem;
+}
+
+header, .left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#logo {
+    width: 100px;
+    margin-right: 1rem;
+}
+
+.pages a:not(:first-child) {
+    margin-left: 1.5rem;
+}
