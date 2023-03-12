@@ -19,10 +19,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from executors.views import SkillsViewSet
+from executors.views import SkillsViewSet, UserViewSet
 
 router = routers.DefaultRouter()
 router.register(r'skills', SkillsViewSet)
+router.register(r'user', UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
