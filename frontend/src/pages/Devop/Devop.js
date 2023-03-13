@@ -8,6 +8,8 @@ import Carousel from "../../components/UI/Carousel/Carousel";
 import Card from "../../components/Card/Card";
 import ReviewsService from "../../API/ReviewsService";
 import Review from "../../components/Review/Review";
+import { useFetching } from "../../hooks/useFetching";
+import Loader from "../../components/UI/Loader/Loader";
 
 const Devop = () => {
   const params = useParams();
@@ -15,50 +17,61 @@ const Devop = () => {
   const [services, setServices] = useState([]);
   const [reviews, setReviews] = useState([]);
 
+  const [fetchUser, isUserLoading, userErrors] = useFetching(async (id) => {
+    const response = await DevopsService.getById(id);
+    setUser(response.data);
+  })
+
+  const [fetchSkill, areSkillLoading, skillsError] = useFetching(async (id) => {
+    const response = await ServicesService.getById(id);
+    setServices(prevState => [...prevState, response.data]);
+  })
+
   useEffect(() => {
-    setUser(DevopsService.getById(params.id));
-    setServices(ServicesService.getByUserId(params.id));
-    setReviews(ReviewsService.getByDevopId(params.id));
+    fetchUser(params.id);
   }, []);
 
+  // useEffect(() => {
+  //   user.card_autor?.forEach(card_id => fetchSkill(card_id));
+  // }, [user]);
+
   return (
-    Object.keys(user).length !== 0
+    !isUserLoading
         ?
           <div className="devop">
-            <img className="profile-image" src={require("../../assets/" + user?.image)} />
             <div className="user-info">
               <div>
                 <h2>{createName(user)}</h2>
                 <p>{user.description}</p>
               </div>
-              <img src={require("../../assets/" + user?.logo)} />
+              <img src={user.avatar} />
             </div>
-            <section>
-              <h3>Услуги:</h3>
-              <div>
-                <Carousel
-                  elements={services}
-                  elementReturner={(data) => {
-                    return <Card key={data.id} service={data.element} />;
-                  }}
-                  elementWidth={500}
-                />
-              </div>
-            </section>
-            <section>
-              <h3>Отзывы:</h3>
-              <div>
-                <Carousel
-                  elements={reviews}
-                  elementReturner={(data) => {
-                    return <Review key={data.id} review={data.element} />;
-                  }}
-                  elementWidth={500}
-                />
-              </div>
-            </section>
+            {/*<section>*/}
+            {/*  <h3>Услуги:</h3>*/}
+            {/*  <div>*/}
+            {/*    <Carousel*/}
+            {/*      elements={services}*/}
+            {/*      elementReturner={(data) => {*/}
+            {/*        return <Card key={data.id} service={data.element} />;*/}
+            {/*      }}*/}
+            {/*      elementWidth={500}*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*</section>*/}
+            {/*<section>*/}
+            {/*  <h3>Отзывы:</h3>*/}
+            {/*  <div>*/}
+            {/*    <Carousel*/}
+            {/*      elements={reviews}*/}
+            {/*      elementReturner={(data) => {*/}
+            {/*        return <Review key={data.id} review={data.element} />;*/}
+            {/*      }}*/}
+            {/*      elementWidth={500}*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*</section>*/}
           </div>
-      : <h1>LOADING...</h1>
+      : <Loader />
   );
 };
 
