@@ -4,7 +4,7 @@ import DevopsService from "../../API/DevopsService";
 import ServicesService from "../../API/ServicesService";
 import "./Devop.css";
 import { createName } from "../../utils/userNameCreater";
-import Carousel from "../../components/Carousel/Carousel";
+import Carousel from "../../components/UI/Carousel/Carousel";
 import Card from "../../components/Card/Card";
 import ReviewsService from "../../API/ReviewsService";
 import Review from "../../components/Review/Review";
