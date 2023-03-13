@@ -1,5 +1,5 @@
 .card {
-    max-width: 500px;
+    max-width: 550px;
     max-height: 300px;
     display: flex;
     flex-direction: column;
@@ -19,12 +19,12 @@
 .user-info {
     height: 50%;
     padding: 16px;
-    display: flex;
-    align-items: end;
+    position: relative;
 }
 
 .user-info > div {
     height: 100%;
+    width: calc(100% - 80px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,12 +33,15 @@
 
 .user-info > img {
     height: 70px;
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
 }
 
 .stack {
     overflow-y: scroll;
     margin-right: 16px;
-    min-height: 30px;
+    min-height: 42px;
 }
 
 .stack::-webkit-scrollbar {
