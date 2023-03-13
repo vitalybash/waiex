@@ -10,7 +10,7 @@ const Card = ({ service }) => {
         <div>
           <p>{service.description}</p>
           <div className="stack">
-            {splitStack(service.stack).map(item => <div className="stack-item">{item}</div>)}
+            {splitStack(service.stack).map(item => <div key={item} className="stack-item">{item}</div>)}
           </div>
         </div>
         <img src={require("../../assets/logo1.png")}/>
