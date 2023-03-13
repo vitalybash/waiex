@@ -36,6 +36,7 @@
     position: absolute;
     right: 8px;
     bottom: 8px;
+    border-radius: 50%;
 }
 
 .stack {

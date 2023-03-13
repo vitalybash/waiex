@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Card.css";
 import { splitStack } from "../../utils/splitStack";
+import DevopsService from "../../API/DevopsService";
+import { useFetching } from "../../hooks/useFetching";
 
 const Card = ({ service }) => {
+  const [user, setUser] = useState({});
+
+  const [fetchUser, isUserLoading, userErrors] = useFetching(async (id) => {
+    const response = await DevopsService.getById(id);
+    setUser(response.data);
+  })
+
+  useEffect(() => {
+    fetchUser(service.autor);
+  }, []);
+
   return (
     <div className="card">
       <img src={service.image}/>
@@ -13,7 +26,9 @@ const Card = ({ service }) => {
             {splitStack(service.stack).map(item => <div key={item} className="stack-item">{item}</div>)}
           </div>
         </div>
-        <img src={require("../../assets/logo1.png")}/>
+        {
+          !isUserLoading && <img src={user.avatar}/>
+        }
       </div>
     </div>
   );
