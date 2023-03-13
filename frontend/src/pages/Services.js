@@ -9,7 +9,7 @@ const Services = () => {
 
   const [fetchServices, isServicesLoading, servicesError] = useFetching(async () => {
     const response = await ServicesService.getAll();
-    setServices(response);
+    setServices(response.data);
   });
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Services = () => {
   return (
     <section className="services">
       <MyInput />
-      {/*<DevelopersGrid services={services} />*/}
+      <DevelopersGrid services={services} />
     </section>
   );
 };
