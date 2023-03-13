@@ -22,7 +22,7 @@ const Devop = () => {
     setUser(response.data);
   })
 
-  const [fetchSkill, areSkillLoading, skillsError] = useFetching(async (id) => {
+  const [fetchSkill, isSkillLoading, skillError] = useFetching(async (id) => {
     const response = await ServicesService.getById(id);
     setServices(prevState => [...prevState, response.data]);
   })
@@ -31,9 +31,11 @@ const Devop = () => {
     fetchUser(params.id);
   }, []);
 
-  // useEffect(() => {
-  //   user.card_autor?.forEach(card_id => fetchSkill(card_id));
-  // }, [user]);
+  useEffect(() => {
+    user.card_autor?.forEach(card_id => fetchSkill(card_id));
+  }, [user]);
+
+  console.log(services);
 
   return (
     !isUserLoading
@@ -46,18 +48,23 @@ const Devop = () => {
               </div>
               <img src={user.avatar} />
             </div>
-            {/*<section>*/}
-            {/*  <h3>Услуги:</h3>*/}
-            {/*  <div>*/}
-            {/*    <Carousel*/}
-            {/*      elements={services}*/}
-            {/*      elementReturner={(data) => {*/}
-            {/*        return <Card key={data.id} service={data.element} />;*/}
-            {/*      }}*/}
-            {/*      elementWidth={500}*/}
-            {/*    />*/}
-            {/*  </div>*/}
-            {/*</section>*/}
+            { isSkillLoading
+              ? <Loader />
+              :
+              <section>
+                <h3>Услуги:</h3>
+                <div>
+                  <Carousel
+                    elements={services}
+                    elementReturner={(data) => {
+                      return <Card key={data.id} service={data.element} />;
+                    }}
+                    elementWidth={500}
+                  />
+                </div>
+              </section>
+            }
+
             {/*<section>*/}
             {/*  <h3>Отзывы:</h3>*/}
             {/*  <div>*/}
