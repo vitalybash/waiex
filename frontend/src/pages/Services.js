@@ -19,7 +19,7 @@ const Services = () => {
 
   return (
     <section className="services">
-      <MyInput />
+      <MyInput id="searchbar" placeholder="Название профессии..." />
       {areServicesLoading
         ? <Loader />
         : <DevelopersGrid services={services} />

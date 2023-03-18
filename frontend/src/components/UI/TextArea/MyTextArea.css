@@ -1,0 +1,5 @@
+.my-textarea {
+    resize: none;
+    height: 200px;
+    overflow-y: scroll;
+}

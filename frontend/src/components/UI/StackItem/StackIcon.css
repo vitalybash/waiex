@@ -1,0 +1,11 @@
+
+.remove-icon {
+    vertical-align: middle;
+    font-size: .75rem;
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+.remove-icon * {
+    color: #e34f4f;
+}

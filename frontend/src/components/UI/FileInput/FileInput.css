@@ -1,0 +1,14 @@
+.unvisible {
+    visibility: hidden;
+}
+
+.input-button {
+    width: 20%;
+    margin-right: 0;
+    cursor: pointer;
+    background: none;
+}
+
+.input-button:hover,
+.input-button:focus {
+}

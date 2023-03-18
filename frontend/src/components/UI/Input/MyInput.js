@@ -1,9 +1,9 @@
 import React from 'react';
 import './MyInput.css';
 
-const MyInput = () => {
+const MyInput = (props) => {
   return (
-    <input className="centered" type="text" placeholder="Название профессии..." />
+    <input className="centered shadow my-input" type="text" {...props} />
   );
 };
 

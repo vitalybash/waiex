@@ -17,12 +17,12 @@ const Card = ({ service }) => {
   }, []);
 
   return (
-    <div className="card">
+    <div className="card shadow">
       <img src={service.image}/>
       <div className="user-info">
         <div>
           <p>{service.description}</p>
-          <div className="stack">
+          <div className="stack scroll">
             {splitStack(service.stack).map(item => <div key={item} className="stack-item">{item}</div>)}
           </div>
         </div>
