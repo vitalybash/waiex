@@ -3,25 +3,27 @@ import MyInput from "../components/UI/Input/MyInput";
 import DevelopersGrid from "../components/ServicesGrid/ServicesGrid";
 import ServicesService from "../API/ServicesService";
 import { useFetching } from "../hooks/useFetching";
+import Loader from "../components/UI/Loader/Loader";
 
 const Services = () => {
   const [services, setServices] = useState([]);
 
-  const [fetchServices, isServicesLoading, servicesError] = useFetching(async () => {
+  const [fetchServices, areServicesLoading, servicesError] = useFetching(async () => {
     const response = await ServicesService.getAll();
-    setServices(response);
+    setServices(response.data);
   });
 
   useEffect(() => {
     fetchServices();
   }, []);
 
-  console.log(services);
-
   return (
     <section className="services">
-      <MyInput />
-      {/*<DevelopersGrid services={services} />*/}
+      <MyInput id="searchbar" placeholder="Название профессии..." />
+      {areServicesLoading
+        ? <Loader />
+        : <DevelopersGrid services={services} />
+      }
     </section>
   );
 };

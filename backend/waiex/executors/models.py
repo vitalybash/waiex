@@ -46,3 +46,4 @@ class Skill(models.Model):  # Модель услуг
     description = models.TextField(max_length=1024, verbose_name='Описание услуги')
     stack = models.CharField(max_length=512, verbose_name='Стек технологии')
     price = models.IntegerField(default=0, verbose_name='Цена услуги')
+

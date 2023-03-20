@@ -1,0 +1,26 @@
+h4 {
+    margin-bottom: 12px;
+}
+
+.stack {
+    max-height: 150px;
+    padding: 12px 8px;
+}
+
+.stack > * {
+    display: inline-block;
+    margin: 8px;
+}
+
+.stack > *:not(:last-child) {
+    margin-right: 8px;
+}
+
+#new-item {
+    display: inline-block;
+    width: auto;
+    max-width: 200px;
+    height: 27px;
+    resize: horizontal;
+    text-align: center;
+}

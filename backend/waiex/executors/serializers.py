@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Skill, CustomUser
+from .models import Skill, CustomUser, Reviews
 
 
 class SkillSerializer(serializers.ModelSerializer):
@@ -24,3 +24,10 @@ class UserSerializer(serializers.ModelSerializer):
             'user_to',
             'card_autor',
         ]
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reviews
+        fields = "__all__"
+
