@@ -35,8 +35,6 @@ const Devop = () => {
     user.card_autor?.forEach(card_id => fetchSkill(card_id));
   }, [user]);
 
-  console.log(services);
-
   return (
     !isUserLoading
         ?
@@ -44,7 +42,7 @@ const Devop = () => {
             <div className="user-info">
               <div>
                 <h2>{createName(user)}</h2>
-                <p>{user.description}</p>
+                <p>{user.info}</p>
               </div>
               <img src={user.avatar} />
             </div>

@@ -5,16 +5,26 @@
 .devop .user-info {
     max-width: 1000px;
     margin-inline: auto;
+    display: flex;
+    align-items: center;
+}
+
+.devop > .user-info h2 {
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.devop > .user-info img {
+    position: relative;
+    margin-left: 2rem;
+    width: 120px;
+    height: 120px;
 }
 
 .profile-image {
     width: 100%;
     border-radius: 0;
     margin-bottom: 4rem;
-}
-
-.user-info img {
-    margin-left: 2rem;
 }
 
 section {
