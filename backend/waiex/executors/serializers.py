@@ -7,8 +7,8 @@ class SkillSerializer(serializers.ModelSerializer):
         model = Skill
         fields = "__all__"
 
-class UserSerializer(serializers.ModelSerializer):
 
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = [
@@ -20,9 +20,9 @@ class UserSerializer(serializers.ModelSerializer):
             'age',
             'info',
             'reviews_count',
-            'review_autor',
+            'review_author',
             'user_to',
-            'card_autor',
+            'card_author',
         ]
 
 
@@ -30,4 +30,3 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviews
         fields = "__all__"
-

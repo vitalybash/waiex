@@ -30,16 +30,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Reviews(models.Model):  # Модель отзывов
-    user_from = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='review_autor',
+    user_from = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.CASCADE, related_name='review_author',
                                   verbose_name='Автор отзыва')
-    user_to = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='user_to',
+    user_to = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.CASCADE, related_name='user_to',
                                    verbose_name='Адресат отзыва')
     text = models.CharField(max_length=5096, verbose_name='Текст отзыва')
     estimation = models.IntegerField(default=0, verbose_name='Оценка')
 
 
 class Skill(models.Model):  # Модель услуг
-    autor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='card_autor',
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='card_author',
                               verbose_name='Автор карточки')
     image = models.ImageField(upload_to='image', verbose_name='фотография услуги')
     title = models.CharField(max_length=256, verbose_name='Заголовок услуги')
