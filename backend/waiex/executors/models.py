@@ -47,3 +47,18 @@ class Skill(models.Model):  # Модель услуг
     stack = models.CharField(max_length=512, verbose_name='Стек технологии')
     price = models.IntegerField(default=0, verbose_name='Цена услуги')
 
+
+class Order(models.Model):
+    customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='order_customer')
+    executor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='order_customer')
+
+    title = models.CharField(max_length=256, verbose_name='Заголовок заказа')
+    description = models.TextField(max_length=1024, verbose_name='Описание заказа')
+    kind = models.CharField(max_length=512, verbose_name='Тип заказа')  # тип это тг бот/сайт/игра/скрипт и др.
+    # заполняется нейронкой
+
+    stack = models.CharField(max_length=512, verbose_name='Стек технологии')
+    price = models.IntegerField(default=0, verbose_name='Цена услуги')
+    deadline = models.IntegerField(default=0, verbose_name='Срок выполнения заказа')
+    status = models.CharField(max_length=512, verbose_name='Статус заказа')  # создан/в работе/завершен/истек срок
+    # размещения

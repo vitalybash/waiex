@@ -6,8 +6,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Skill, CustomUser, Reviews
-from .serializers import SkillSerializer, UserSerializer, ReviewSerializer
+from .models import Skill, CustomUser, Reviews, Order
+from .serializers import SkillSerializer, UserSerializer, ReviewSerializer, OrderSerializer
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'my_crazy_service.settings')
 django.setup()
@@ -32,4 +32,8 @@ class UserViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Reviews.objects.all()
     serializer_class = ReviewSerializer
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    pass
 
