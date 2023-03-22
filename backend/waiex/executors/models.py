@@ -50,7 +50,7 @@ class Skill(models.Model):  # Модель услуг
 
 class Order(models.Model):
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='order_customer')
-    executor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='order_customer')
+    executor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='order_executor')
 
     title = models.CharField(max_length=256, verbose_name='Заголовок заказа')
     description = models.TextField(max_length=1024, verbose_name='Описание заказа')
