@@ -22,6 +22,7 @@ const Card = ({ service }) => {
       <div className="user-info">
         <div>
           <p>{service.description}</p>
+          <p>Цена: {service.price}</p>
           <div className="stack scroll">
             {splitStack(service.stack).map(item => <div key={item} className="stack-item">{item}</div>)}
           </div>
