@@ -19,12 +19,13 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from executors.views import SkillsViewSet, UserViewSet, ReviewViewSet
+from executors.views import SkillsViewSet, UserViewSet, ReviewViewSet, OrderViewSet
 
 router = routers.DefaultRouter()
 router.register(r'skills', SkillsViewSet)
 router.register(r'user', UserViewSet)
 router.register(r'reviews', ReviewViewSet)
+router.register(r'orders', OrderViewSet)
 
 
 urlpatterns = [

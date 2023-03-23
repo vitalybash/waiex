@@ -35,5 +35,6 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    pass
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
