@@ -12,6 +12,10 @@
     border-top-right-radius: inherit;
 }
 
+.card p {
+    margin-bottom: 0;
+}
+
 .user-info {
     height: 50%;
     width: 100%;
@@ -25,7 +29,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
+    gap: 8px;
 }
 
 .user-info > img {
@@ -38,8 +42,6 @@
 
 .stack {
     overflow-y: scroll;
-    margin-right: 16px;
-    min-height: 42px;
 }
 
 .scroll::-webkit-scrollbar {
@@ -56,9 +58,11 @@
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
+.card .stack-item {
+    /*margin-bottom: 16px;*/
+}
+
 .stack-item {
-    margin-right: 12px;
-    margin-bottom: 12px;
     color: #565757;
     border-radius: 8px;
     padding: 2px 8px;
