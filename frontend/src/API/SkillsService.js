@@ -1,11 +1,15 @@
 import axios from "axios";
 
-export default class ServicesService {
+export default class SkillsService {
   static async getAll() {
     return await axios.get('http://127.0.0.1:8000/skills/');
   }
 
   static async getById(id) {
     return await axios.get('http://127.0.0.1:8000/skills/' + id);
+  }
+
+  static async getByUserId(user_id) {
+    return await axios.get('http://127.0.0.1:8000/skills/' + user_id + '/user_skill/');
   }
 }

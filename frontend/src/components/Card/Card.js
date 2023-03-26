@@ -4,7 +4,7 @@ import { splitStack } from "../../utils/splitStack";
 import DevopsService from "../../API/DevopsService";
 import { useFetching } from "../../hooks/useFetching";
 
-const Card = ({ service }) => {
+const Card = ({ skill }) => {
   const [user, setUser] = useState({});
 
   const [fetchUser, isUserLoading, userErrors] = useFetching(async (id) => {
@@ -13,18 +13,18 @@ const Card = ({ service }) => {
   })
 
   useEffect(() => {
-    fetchUser(service.autor);
+    fetchUser(skill.author);
   }, []);
 
   return (
     <div className="card shadow">
-      <img src={service.image}/>
+      <img src={skill.image}/>
       <div className="user-info">
         <div>
-          <p>{service.description}</p>
-          <p>Цена: {service.price}</p>
+          <p>{skill.description}</p>
+          <p>Цена: {skill.price}</p>
           <div className="stack scroll">
-            {splitStack(service.stack).map(item => <div key={item} className="stack-item">{item}</div>)}
+            {splitStack(skill.stack).map(item => <div key={item} className="stack-item">{item}</div>)}
           </div>
         </div>
         {

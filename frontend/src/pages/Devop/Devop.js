@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import DevopsService from "../../API/DevopsService";
-import ServicesService from "../../API/ServicesService";
+import SkillsService from "../../API/SkillsService";
 import "./Devop.css";
 import { createName } from "../../utils/userNameCreater";
 import Carousel from "../../components/UI/Carousel/Carousel";
@@ -14,7 +14,7 @@ import Loader from "../../components/UI/Loader/Loader";
 const Devop = () => {
   const params = useParams();
   const [user, setUser] = useState({});
-  const [services, setServices] = useState([]);
+  const [skills, setSkills] = useState([]);
   const [reviews, setReviews] = useState([]);
 
   const [fetchUser, isUserLoading, userErrors] = useFetching(async (id) => {
@@ -22,9 +22,14 @@ const Devop = () => {
     setUser(response.data);
   })
 
-  const [fetchSkill, isSkillLoading, skillError] = useFetching(async (id) => {
-    const response = await ServicesService.getById(id);
-    setServices(prevState => [...prevState, response.data]);
+  const [fetchSkills, areSkillsLoading, skillsError] = useFetching(async (id) => {
+    const response = await SkillsService.getByUserId(id);
+    setSkills(response.data);
+  })
+
+  const [fetchReviews, areReviewsLoading, reviewsError] = useFetching(async (id) => {
+    const response = await ReviewsService.getAll();
+    setReviews(response.data);
   })
 
   useEffect(() => {
@@ -32,7 +37,8 @@ const Devop = () => {
   }, []);
 
   useEffect(() => {
-    user.card_autor?.forEach(card_id => fetchSkill(card_id));
+    fetchSkills(params.id);
+    fetchReviews(params.id);
   }, [user]);
 
   return (
@@ -46,16 +52,16 @@ const Devop = () => {
               </div>
               <img src={user.avatar} />
             </div>
-            { isSkillLoading
+            { areSkillsLoading
               ? <Loader />
               :
               <section>
                 <h3>Услуги:</h3>
                 <div>
                   <Carousel
-                    elements={services}
+                    elements={skills}
                     elementReturner={(data) => {
-                      return <Card key={data.id} service={data.element} />;
+                      return <Card key={data.id} skill={data.element} />;
                     }}
                     elementWidth={500}
                   />
@@ -63,18 +69,23 @@ const Devop = () => {
               </section>
             }
 
-            {/*<section>*/}
-            {/*  <h3>Отзывы:</h3>*/}
-            {/*  <div>*/}
-            {/*    <Carousel*/}
-            {/*      elements={reviews}*/}
-            {/*      elementReturner={(data) => {*/}
-            {/*        return <Review key={data.id} review={data.element} />;*/}
-            {/*      }}*/}
-            {/*      elementWidth={500}*/}
-            {/*    />*/}
-            {/*  </div>*/}
-            {/*</section>*/}
+            {
+              areReviewsLoading
+              ? <Loader/>
+              :
+              <section>
+                <h3>Отзывы:</h3>
+                <div>
+                  <Carousel
+                    elements={reviews}
+                    elementReturner={(data) => {
+                      return <Review key={data.id} review={data.element} />;
+                    }}
+                    elementWidth={500}
+                  />
+                </div>
+              </section>
+            }
           </div>
       : <Loader />
   );

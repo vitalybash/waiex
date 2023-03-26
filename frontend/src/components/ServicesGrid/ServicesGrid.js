@@ -2,12 +2,12 @@ import React from 'react';
 import Card from "../Card/Card";
 import "./ServicesGrid.css";
 
-const DevelopersGrid = ({services}) => {
+const ServicesGrid = ({ skills }) => {
   return (
     <div className="grid-container centered">
-      {services.map(service => <Card key={service.id} service={service} />)}
+      {skills.map(skill => <Card key={skill.id} skill={skill}/>)}
     </div>
   );
 };
 
-export default DevelopersGrid;
+export default ServicesGrid;

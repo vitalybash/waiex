@@ -1,6 +1,8 @@
 .card {
+    min-width: 400px;
     max-width: 550px;
     max-height: 300px;
+    min-height: 120px;
     display: flex;
     flex-direction: column;
 }
@@ -17,7 +19,7 @@
 }
 
 .user-info {
-    height: 50%;
+    height: 100%;
     width: 100%;
     padding: 16px;
     position: relative;

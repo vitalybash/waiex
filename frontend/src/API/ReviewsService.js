@@ -1,9 +1,10 @@
 import axios from "axios";
 
 export default class ReviewsService {
-  static getAll() {
+  static async getAll() {
+    return await axios.get('http://127.0.0.1:8000/reviews/');
   }
 
-  static getByDevopId(id) {
+  static getByUserId(user_id) {
   }
 }

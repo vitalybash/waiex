@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import MyInput from "../components/UI/Input/MyInput";
-import DevelopersGrid from "../components/ServicesGrid/ServicesGrid";
-import ServicesService from "../API/ServicesService";
+import ServicesGrid from "../components/ServicesGrid/ServicesGrid";
+import SkillsService from "../API/SkillsService";
 import { useFetching } from "../hooks/useFetching";
 import Loader from "../components/UI/Loader/Loader";
 
-const Services = () => {
-  const [services, setServices] = useState([]);
+const Skills = () => {
+  const [skills, setSkills] = useState([]);
 
   const [fetchServices, areServicesLoading, servicesError] = useFetching(async () => {
-    const response = await ServicesService.getAll();
-    setServices(response.data);
+    const response = await SkillsService.getAll();
+    setSkills(response.data);
   });
 
   useEffect(() => {
@@ -19,13 +19,13 @@ const Services = () => {
 
   return (
     <section className="services">
-      <MyInput id="searchbar" placeholder="Название профессии..." />
+      <MyInput id="searchbar" placeholder="Название профессии..."/>
       {areServicesLoading
-        ? <Loader />
-        : <DevelopersGrid services={services} />
+        ? <Loader/>
+        : <ServicesGrid skills={skills}/>
       }
     </section>
   );
 };
 
-export default Services;
+export default Skills;
