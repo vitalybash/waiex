@@ -10,6 +10,7 @@ import ReviewsService from "../../API/ReviewsService";
 import Review from "../../components/Review/Review";
 import { useFetching } from "../../hooks/useFetching";
 import Loader from "../../components/UI/Loader/Loader";
+import CardsSection from "../../components/CardsSection";
 
 const Devop = () => {
   const params = useParams();
@@ -54,38 +55,18 @@ const Devop = () => {
             </div>
             { areSkillsLoading
               ? <Loader />
-              :
-              <section>
-                <h3>Услуги:</h3>
-                <div>
-                  <Carousel
-                    elements={skills}
-                    elementReturner={(data) => {
-                      return <Card key={data.id} skill={data.element} />;
-                    }}
-                    elementWidth={500}
-                  />
-                </div>
-              </section>
+              : <CardsSection title="Услуги" elements={skills} returner={(data) => {
+                  return <Card key={data.id} skill={data.element} />;
+                }} />
             }
 
             {
               areReviewsLoading
               ? <Loader/>
-              :
-              <section>
-                <h3>Отзывы:</h3>
-                <div>
-                  <Carousel
-                    elements={reviews}
-                    elementReturner={(data) => {
-                      return <Review key={data.id} review={data.element} />;
-                    }}
-                    elementWidth={500}
-                  />
-                </div>
-              </section>
-            }
+              : <CardsSection title="Отзывы" elements={reviews} returner={(data) => {
+                  return <Review key={data.id} review={data.element} />;
+                }} />
+              }
           </div>
       : <Loader />
   );
