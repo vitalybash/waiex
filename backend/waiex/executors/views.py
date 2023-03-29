@@ -38,7 +38,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     
-    @action(methods=['get'], detail=True, url_path='user_щквук')
+    @action(methods=['get'], detail=True, url_path='user_order')
     def get_users_skills(self, request, pk=None):
         queryset = Order.objects.filter(customer=pk)
         serializer_class = OrderSerializer(queryset, many=True)
