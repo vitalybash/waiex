@@ -20,16 +20,21 @@ from django.urls import path, include
 from rest_framework import routers
 
 from executors.views import SkillsViewSet, UserViewSet, ReviewViewSet, OrderViewSet
+from chat.views import ChatViewSet
 
 router = routers.DefaultRouter()
 router.register(r'skills', SkillsViewSet)
 router.register(r'user', UserViewSet)
 router.register(r'reviews', ReviewViewSet)
 router.register(r'orders', OrderViewSet)
+router.register(r'chat', ChatViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('orders/<int:pk>/user_order/', OrderViewSet.as_view({'get': 'get_users_order'})),
+    path('skills/<int:pk>/user_skill/', SkillsViewSet.as_view({'get': 'get_users_skills'})),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += router.urls
 

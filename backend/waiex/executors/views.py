@@ -38,9 +38,14 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     
-    @action(methods=['get'], detail=True, url_path='user_щквук')
-    def get_users_skills(self, request, pk=None):
+    @action(methods=['get'], detail=True)
+    def get_users_order(self, request, pk=None):
         queryset = Order.objects.filter(customer=pk)
         serializer_class = OrderSerializer(queryset, many=True)
         return Response(serializer_class.data)
+
+    @action(methods=['get'], detail=False, url_path='order')
+    def abc(self, request, ):
+        a = str(request).split('/')[-1][1:-2]
+        return Response(a)
 
