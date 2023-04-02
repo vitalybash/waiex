@@ -16,3 +16,13 @@ header, .left {
 .pages a:not(:first-child) {
     margin-left: 1.5rem;
 }
+
+.btns > .btn {
+    font-size: 1rem;
+    padding: 2px 16px;
+    border-radius: 8px;
+}
+
+.btns > .btn:not(:last-child) {
+    margin-right: 8px;
+}
