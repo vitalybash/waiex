@@ -3,6 +3,7 @@ from .models import Skill, CustomUser, Reviews, Order
 
 
 class SkillSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(max_length=None, use_url=True)
     class Meta:
         model = Skill
         fields = "__all__"
@@ -33,6 +34,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    file = serializers.FileField(max_length=None, use_url=True)
     class Meta:
         model = Order
         fields = "__all__"
