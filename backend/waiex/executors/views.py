@@ -17,7 +17,7 @@ class SkillsViewSet(viewsets.ModelViewSet):
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
 
-    @action(methods=['get'], detail=True, url_path='user_skill')
+    @action(methods=['get'], detail=True)
     def get_users_skills(self, request, pk=None):
         queryset = Skill.objects.filter(author=pk)
         serializer_class = SkillSerializer(queryset, many=True)
@@ -43,9 +43,4 @@ class OrderViewSet(viewsets.ModelViewSet):
         queryset = Order.objects.filter(customer=pk)
         serializer_class = OrderSerializer(queryset, many=True)
         return Response(serializer_class.data)
-
-    @action(methods=['get'], detail=False, url_path='order')
-    def abc(self, request, ):
-        a = str(request).split('/')[-1][1:-2]
-        return Response(a)
 
