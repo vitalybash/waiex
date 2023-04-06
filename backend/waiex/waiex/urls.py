@@ -32,6 +32,9 @@ router.register(r'chat', ChatViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('orders/<int:pk>/user_order/', OrderViewSet.as_view({'get': 'get_users_order'})),
+    path('skills/<int:pk>/user_skill/', SkillsViewSet.as_view({'get': 'get_users_skills'})),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += router.urls
 
