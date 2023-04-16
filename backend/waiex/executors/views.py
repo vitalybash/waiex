@@ -2,12 +2,14 @@ import json
 import os
 import django
 from django.conf import settings
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.permissions import AllowAny
+from rest_framework.views import APIView
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .models import Skill, CustomUser, Reviews, Order
-from .serializers import SkillSerializer, UserSerializer, ReviewSerializer, OrderSerializer
+from .serializers import SkillSerializer, UserSerializer, ReviewSerializer, OrderSerializer, RegistrationSerializer
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'my_crazy_service.settings')
 django.setup()
@@ -44,3 +46,21 @@ class OrderViewSet(viewsets.ModelViewSet):
         serializer_class = OrderSerializer(queryset, many=True)
         return Response(serializer_class.data)
 
+
+class RegistrationAPIView(APIView):
+    """
+    Разрешить всем пользователям (аутентифицированным и нет) доступ к данному эндпоинту.
+    """
+    permission_classes = (AllowAny,)
+    serializer_class = RegistrationSerializer
+
+    def post(self, request):
+        user = request.data.get('user', {})
+
+        # Паттерн создания сериализатора, валидации и сохранения - довольно
+        # стандартный, и его можно часто увидеть в реальных проектах.
+        serializer = self.serializer_class(data=user)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

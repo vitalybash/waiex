@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from executors.views import SkillsViewSet, UserViewSet, ReviewViewSet, OrderViewSet
+from executors.views import SkillsViewSet, UserViewSet, ReviewViewSet, OrderViewSet, RegistrationAPIView
 from chat.views import ChatViewSet
 
 router = routers.DefaultRouter()
@@ -34,7 +34,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('orders/<int:pk>/user_order/', OrderViewSet.as_view({'get': 'get_users_order'})),
     path('skills/<int:pk>/user_skill/', SkillsViewSet.as_view({'get': 'get_users_skills'})),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('registration/', include('executors.urls', namespace='authentication')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += router.urls
-
