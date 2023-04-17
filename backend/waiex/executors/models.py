@@ -14,6 +14,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(default='', verbose_name='Почта пользователя', unique=True)
     password = models.CharField(default='', max_length=1024)
     avatar = models.ImageField(upload_to='avatar', verbose_name='аватар пользователя')
+    username = models.CharField(max_length=256, default='', verbose_name='Короткое имя исполнителя')
     name = models.CharField(max_length=256, default='', verbose_name='Имя исполнителя')
     surname = models.CharField(max_length=256, default='', verbose_name='Фамилия исполнителя')
     age = models.IntegerField(default=0, verbose_name='Возраст исполнителя')
@@ -64,7 +65,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         пользователя, срок действия токена составляет 1 день от создания
         """
         dt = datetime.now() + timedelta(days=1)
-
         token = jwt.encode({
             'id': self.pk,
             'exp': int(dt.strftime('%s'))

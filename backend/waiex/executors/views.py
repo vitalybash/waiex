@@ -11,6 +11,8 @@ from rest_framework.response import Response
 from .models import Skill, CustomUser, Reviews, Order
 from .serializers import SkillSerializer, UserSerializer, ReviewSerializer, OrderSerializer, RegistrationSerializer
 
+from .renders import UserJSONRenderer
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'my_crazy_service.settings')
 django.setup()
 
@@ -53,6 +55,7 @@ class RegistrationAPIView(APIView):
     """
     permission_classes = (AllowAny,)
     serializer_class = RegistrationSerializer
+    renderer_classes = (UserJSONRenderer,)
 
     def post(self, request):
         user = request.data.get('user', {})
