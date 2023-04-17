@@ -10,7 +10,7 @@ import ReviewsService from "../../API/ReviewsService";
 import Review from "../../components/Review/Review";
 import { useFetching } from "../../hooks/useFetching";
 import Loader from "../../components/UI/Loader/Loader";
-import CardsSection from "../../components/CardsSection";
+import CardsSection from "../../components/CardsSections/CardsSection";
 
 const Devop = () => {
   const params = useParams();

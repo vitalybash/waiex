@@ -1,0 +1,39 @@
+.modal-form {
+    min-width: 500px;
+    padding: 2rem 1rem;
+}
+
+.modal-form h3 {
+    margin-left: 8px;
+    margin-bottom: 1rem;
+}
+
+.modal-form > div {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: right;
+    gap: 24px;
+}
+
+.modal-form > div.error {
+    margin-left: 8px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    justify-content: left;
+}
+
+.modal-form > div a {
+    text-align: center;
+    max-width: 50%;
+}
+
+.modal-form p > a {
+    margin-left: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-form a {
+    cursor: pointer;
+}
