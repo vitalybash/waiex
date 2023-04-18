@@ -65,12 +65,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         пользователя, срок действия токена составляет 1 день от создания
         """
         dt = datetime.now() + timedelta(days=1)
+        # return dt.strftime('%s')
         token = jwt.encode({
             'id': self.pk,
-            'exp': int(dt.strftime('%s'))
+            'exp': int(dt.strftime('%S'))
         }, settings.SECRET_KEY, algorithm='HS256')
-
-        return token.decode('utf-8')
+        return token
 
 
 class Reviews(models.Model):  # Модель отзывов
