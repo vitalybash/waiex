@@ -1,15 +1,15 @@
-import axios from "axios";
+import $api from "../http";
 
 export default class SkillsService {
   static async getAll() {
-    return await axios.get('http://127.0.0.1:8000/skills/');
+    return await $api.get('/skills/');
   }
 
   static async getById(id) {
-    return await axios.get('http://127.0.0.1:8000/skills/' + id);
+    return await $api.get('/skills/' + id);
   }
 
   static async getByUserId(user_id) {
-    return await axios.get('http://127.0.0.1:8000/skills/' + user_id + '/user_skill/');
+    return await $api.get('/skills/' + user_id + '/user_skill/');
   }
 }
