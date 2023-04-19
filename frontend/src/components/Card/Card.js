@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./Card.css";
 import { splitStack } from "../../utils/splitStack";
-import DevopsService from "../../API/DevopsService";
+import DevopsService from "../../services/DevopsService";
 import { useFetching } from "../../hooks/useFetching";
 
 const Card = ({ skill }) => {

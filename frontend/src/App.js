@@ -2,7 +2,6 @@ import Header from "./components/UI/Header/Header";
 import "./styles/App.css";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
-import { AuthContext } from "./context/context";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -18,18 +17,10 @@ function App() {
   }, []);
 
   return (
-    <AuthContext.Provider value={{
-      isAuth,
-      setIsAuth,
-      isLoading,
-      user,
-      setUser
-    }}>
-      <BrowserRouter>
-        <Header />
-        <AppRouter />
-      </BrowserRouter>
-    </AuthContext.Provider>
+    <BrowserRouter>
+      <Header />
+      <AppRouter />
+    </BrowserRouter>
   );
 }
 

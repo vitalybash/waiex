@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MyInput from "../components/UI/Input/MyInput";
 import ServicesGrid from "../components/ServicesGrid/ServicesGrid";
-import SkillsService from "../API/SkillsService";
+import SkillsService from "../services/SkillsService";
 import { useFetching } from "../hooks/useFetching";
 import Loader from "../components/UI/Loader/Loader";
 

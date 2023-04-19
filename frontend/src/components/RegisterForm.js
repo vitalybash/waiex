@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MyInput from "./UI/Input/MyInput";
 import "../styles/form.css";
 import Error from "./UI/Error/Error";
-import UsersService from "../API/UsersService";
+import UsersService from "../services/UsersService";
 
 const RegisterForm = ({setVisible, setLogin}) => {
   const [email, setEmail] = useState("");

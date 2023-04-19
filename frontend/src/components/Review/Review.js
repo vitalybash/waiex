@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "../Card/Card.css";
 import { useFetching } from "../../hooks/useFetching";
-import DevopsService from "../../API/DevopsService";
+import DevopsService from "../../services/DevopsService";
 import Loader from "../UI/Loader/Loader";
 
 const Review = ({ review }) => {

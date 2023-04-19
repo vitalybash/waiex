@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import DevopsService from "../../API/DevopsService";
-import SkillsService from "../../API/SkillsService";
+import DevopsService from "../../services/DevopsService";
+import SkillsService from "../../services/SkillsService";
 import "./Devop.css";
 import { createName } from "../../utils/userNameCreater";
 import Carousel from "../../components/UI/Carousel/Carousel";
 import Card from "../../components/Card/Card";
-import ReviewsService from "../../API/ReviewsService";
+import ReviewsService from "../../services/ReviewsService";
 import Review from "../../components/Review/Review";
 import { useFetching } from "../../hooks/useFetching";
 import Loader from "../../components/UI/Loader/Loader";
