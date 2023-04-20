@@ -1,16 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import logo from '../../../assets/logo.png';
 import './Header.css';
 import MyModal from "../MyModal/MyModal";
-import { AuthContext } from "../../../context/context";
 import LoginForm from "../../LoginForm";
 import RegisterForm from "../../RegisterForm";
 
 const Header = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
-
-  const { user, isAuth } = useContext(AuthContext);
 
   return (
     <>
@@ -23,14 +20,10 @@ const Header = () => {
             <a href="#">Кабинет</a>
           </div>
         </div>
-        {isAuth
-          ? <a href="#">{user?.name}</a>
-          :
-          <div className="btns">
-            <a className="btn btn-success" onClick={() => setLoginModal(true)}>Войти</a>
-            <a className="btn btn-primary" onClick={() => setRegisterModal(true)}>Регистрация</a>
-          </div>
-        }
+        <div className="btns">
+          <a className="btn btn-success" onClick={() => setLoginModal(true)}>Войти</a>
+          <a className="btn btn-primary" onClick={() => setRegisterModal(true)}>Регистрация</a>
+        </div>
       </header>
       <MyModal visible={loginModal} setVisible={setLoginModal}>
         <LoginForm setVisible={setLoginModal} setRegister={setRegisterModal}/>

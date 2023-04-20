@@ -2,16 +2,22 @@ import React, { useState } from 'react';
 import MyInput from "./UI/Input/MyInput";
 import "../styles/form.css";
 import Error from "./UI/Error/Error";
-import UsersService from "../services/UsersService";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../actions/auth";
+import { clearMessage } from "../actions/message";
 
 const RegisterForm = ({setVisible, setLogin}) => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [login, setLog] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("");
+  const [successful, setSuccessful] = useState(false);
+
+  const { message } = useSelector(state => state.message);
+  const dispatch = useDispatch();
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
@@ -27,28 +33,31 @@ const RegisterForm = ({setVisible, setLogin}) => {
     setEmail(event.target.value);
   };
 
-  const register = () => {
-    if (password !== repeatPassword) {
-      setPasswordError("Пароли не совпадают");
-      return;
-    }
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    setSuccessful(false);
+
+
+    dispatch(register(username, email, password))
+      .then(() => {
+        setSuccessful(true);
+      })
+      .catch(() => {
+        setSuccessful(false);
+      });
+  };
+
+  const clearFields = () => {
+    setEmail("");
+    setEmailError("");
+    setUsername("");
+    setPassword("");
+    setRepPassword("")
     setPasswordError("");
-    const user = {
-      "username": login,
-      "email": email,
-      "password": password
-    }
-
-    UsersService.registration(user)
-      .then(res => {
-        setError("");
-        console.log(res);
-      })
-      .catch(res => {
-
-        setError(res.message);
-        console.log(error)
-      })
+    setError("");
+    setSuccessful(false);
+    dispatch(clearMessage());
   }
 
   return (
@@ -59,7 +68,7 @@ const RegisterForm = ({setVisible, setLogin}) => {
       />
       { emailError && <Error message={emailError} /> }
       <MyInput placeholder="Логин" id="loginR"
-               value={login} onChange={(e) => setLog(e.target.value)}
+               value={username} onChange={(e) => setUsername(e.target.value)}
       />
       <MyInput type="password" placeholder="Пароль" id="passwordR"
                value={password} onChange={(e) => setPassword(e.target.value)}
@@ -70,16 +79,24 @@ const RegisterForm = ({setVisible, setLogin}) => {
       { passwordError && <Error message={passwordError} /> }
       { error && <Error message={error} /> }
       <div>
-        <a className="shadow my-input" onClick={() => register()}>Регистрация</a>
+        <a className="shadow my-input" onClick={(e) => handleRegister(e)}>Регистрация</a>
       </div>
       <p>Уже есть аккаунт?
         <a onClick={() => {
+          clearFields();
           setVisible(false);
           setLogin(true);
         }}>
           Войти
         </a>
       </p>
+      {message && (
+        <div className="form-group">
+          <div className={ successful ? "alert alert-success" : "alert alert-danger" } role="alert">
+            {message}
+          </div>
+        </div>
+      )}
     </form>
   );
 };

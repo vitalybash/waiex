@@ -2,7 +2,7 @@ import axios from "axios";
 import $api from "../http/index";
 
 const register = (username, email, password) => {
-  return $api.post("/register/register", {
+  return $api.post("/registration/registration/", {
     "user": {
       "username": username,
       "email": email,
@@ -13,7 +13,7 @@ const register = (username, email, password) => {
 
 const login = (email, password) => {
   return $api
-    .post('/register/login', {
+    .post('/registration/login/', {
       "user": {
         "email": email,
         "password": password
