@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
 import MyInput from "./UI/Input/MyInput";
 import "../styles/form.css";
-import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/auth";
 import { clearMessage } from "../actions/message";
 
 const LoginForm = ({setVisible, setRegister}) => {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const { isLoggedIn } = useSelector(state => state.auth);
-  const { message } = useSelector(state => state.message);
 
   const dispatch = useDispatch();
 
@@ -28,6 +22,13 @@ const LoginForm = ({setVisible, setRegister}) => {
     setPassword(password);
   };
 
+  const clearFields = () => {
+    setEmail("");
+    setPassword("");
+    setLoading(false);
+    dispatch(clearMessage());
+  }
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -35,24 +36,13 @@ const LoginForm = ({setVisible, setRegister}) => {
 
     dispatch(login(email, password))
       .then(() => {
-        navigate("/profile");
-        window.location.reload();
+        clearFields();
+        setVisible(false);
       })
       .catch(() => {
         setLoading(false);
       });
   };
-
-  if (isLoggedIn) {
-    return <Navigate to="/profile" />;
-  }
-
-  const clearFields = () => {
-    setEmail("");
-    setPassword("");
-    setLoading(false);
-    dispatch(clearMessage());
-  }
 
   return (
     <form className="modal-form">
