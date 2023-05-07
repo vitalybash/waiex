@@ -51,20 +51,6 @@ a {
     background-color: #4cae4c;
 }
 
-.btn-danger {
-    color: #ff4444;
-    border-left: 1px solid #ff4444;
-    margin-left: 16px;
-    padding-bottom: 2px;
-    border-radius: 0 8px 8px 0;
-}
-
-.btn-danger:hover,
-.btn-danger:focus {
-    background-color: #ff4444;
-    color: #fff;
-}
-
 .btn-primary {
     border: 1px solid #2d97c2;
     color: #2d97c2;
