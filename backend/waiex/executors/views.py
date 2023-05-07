@@ -19,8 +19,22 @@ django.setup()
 
 
 class SkillsViewSet(viewsets.ModelViewSet):
-    queryset = Skill.objects.all()
     serializer_class = SkillSerializer
+
+    def get_queryset(self):
+        queryset = Skill.objects.all()
+        title = self.request.query_params.get('title')
+        price = self.request.query_params.get('price')
+        stack = self.request.query_params.get('stack')
+        if title != None:
+            queryset = queryset.filter(title__contains=title)  # фильтрация по наличию искомой фразы в названии услуги
+        if stack != None:
+            queryset = queryset.filter(stack__contains=stack)  # фильтрация по стеку услуги(временно только 1 значение)
+        if price != None:
+            price = tuple(map(int, price.split('-')))
+            queryset = queryset.filter(
+                price__range=price)  # фильтрация по диапазону цен(временно только 1 диапазон формата (min, max) )
+        return queryset
 
     @action(methods=['get'], detail=True)
     def get_users_skills(self, request, pk=None):
@@ -40,9 +54,25 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    
+
+    def get_queryset(self):
+        queryset = Order.objects.all()
+        title = self.request.query_params.get('title')
+        price = self.request.query_params.get('price')
+        stack = self.request.query_params.get('stack')
+        kind = self.request.query_params.get('kind')
+        if title != None:
+            queryset = queryset.filter(title__contains=title)  # фильтрация по наличию искомой фразы в названии заказа
+        if stack != None:
+            queryset = queryset.filter(stack__contains=stack)# фильтрация по стеку услуги(временно только 1 значение)
+        if price != None:
+            price = tuple(map(int, price.split('-')))
+            queryset = queryset.filter(price__range=price)# фильтрация по диапазону цен(временно только 1 диапазон формата (min, max) )
+        if kind != None:
+            queryset = queryset.filter(kind__contains=kind)# фильтрация по типу заказа
+        return queryset
+
     @action(methods=['get'], detail=True)
     def get_users_order(self, request, pk=None):
         queryset = Order.objects.filter(customer=pk)
@@ -53,6 +83,8 @@ class OrderViewSet(viewsets.ModelViewSet):
 class FileViewSet(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = FileSerializer
+
+
 class RegistrationAPIView(APIView):
     """
     Разрешить всем пользователям (аутентифицированным и нет) доступ к данному эндпоинту.

@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'waiex.wsgi.application'
+WSGI_APPLICATION = 'waiex.wsgi.application'
 
 
 # Database
