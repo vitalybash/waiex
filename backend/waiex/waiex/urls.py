@@ -23,10 +23,10 @@ from executors.views import SkillsViewSet, UserViewSet, ReviewViewSet, OrderView
 from chat.views import ChatViewSet
 
 router = routers.DefaultRouter()
-router.register(r'skills', SkillsViewSet)
+router.register(r'skills', SkillsViewSet, 'foobar-detail')
 router.register(r'user', UserViewSet)
 router.register(r'reviews', ReviewViewSet)
-router.register(r'orders', OrderViewSet)
+router.register(r'orders', OrderViewSet, 'foobar-detail')
 router.register(r'chat', ChatViewSet)
 
 
