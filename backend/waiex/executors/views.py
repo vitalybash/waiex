@@ -8,9 +8,9 @@ from rest_framework.views import APIView
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Skill, CustomUser, Reviews, Order, File
+from .models import Skill, CustomUser, Reviews, Order
 from .serializers import SkillSerializer, UserSerializer, ReviewSerializer, OrderSerializer, RegistrationSerializer, \
-    LoginSerializer, FileSerializer
+    LoginSerializer
 
 from .renders import UserJSONRenderer
 
@@ -50,9 +50,6 @@ class OrderViewSet(viewsets.ModelViewSet):
         return Response(serializer_class.data)
 
 
-class FileViewSet(viewsets.ModelViewSet):
-    queryset = File.objects.all()
-    serializer_class = FileSerializer
 class RegistrationAPIView(APIView):
     """
     Разрешить всем пользователям (аутентифицированным и нет) доступ к данному эндпоинту.
