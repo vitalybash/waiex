@@ -5,12 +5,14 @@ from asgiref.sync import async_to_sync
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
-        self.accept()
+        self.room_group_name = 'test'
 
-        self.send(text_data=json.dumps({
-            'type': 'connection_established',
-            'message': 'You are now connected'
-        }))
+        async_to_sync(self.channel_layer.group_add)(
+            self.room_group_name,
+            self.channel_name
+        )
+
+        self.accept()
 
     def receive(self, text_data):
         text_data_json = json.loads(text_data)

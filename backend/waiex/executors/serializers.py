@@ -43,13 +43,25 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = "__all__"
+        fields = [
+            'id',
+            'customer',
+            'executor',
+            'title',
+            'description',
+            'kind',
+            'stack',
+            'price',
+            'deadline',
+            'status',
+            'files',
+        ]
 
     def create(self, validated_data):
-        files_data = validated_data.pop('files')
+        files_data = self.context('files')
         order = Order.objects.create(**validated_data)
         for file_data in files_data:
-            File.objects.create(order=order, **file_data)
+            File.objects.create(order=order, file=file_data)
         return order
 
 
