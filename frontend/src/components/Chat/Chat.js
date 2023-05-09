@@ -21,7 +21,7 @@ const Chat = () => {
     }
 
     // Connect to the WebSocket server with the username as a query parameter
-    const newSocket = new WebSocket(`ws://http://127.0.0.1:8000/ws/socket-server/`);
+    const newSocket = new WebSocket(`ws://localhost:8000/ws/socket-server/`);
     setSocket(newSocket);
 
     newSocket.onopen = () => console.log("WebSocket connected");
@@ -29,7 +29,8 @@ const Chat = () => {
 
     // Clean up the WebSocket connection when the component unmounts
     return () => {
-      newSocket.close();
+      if (newSocket.readyState === 1)
+        newSocket.close();
     };
   }, [username]);
 
@@ -42,9 +43,39 @@ const Chat = () => {
     }
   }, [socket]);
 
-  return (
-    <div>
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (message && socket) {
+      const data = {
+        message: message,
+        username: username,
+      };
+      socket.send(JSON.stringify(data));
+      setMessage("");
+    }
+  };
 
+  return (
+    <div className="chat-container">
+      <div className="chat-header">Chat</div>
+      <div className="message-container">
+        {messages.map((message, index) => (
+          <div key={index} className="message">
+            <div className="message-username">{message.username}:</div>
+            <div className="message-content">{message.message}</div>
+            <div className="message-timestamp">{message.timestamp}</div>
+          </div>
+        ))}
+      </div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Type a message..."
+          value={message}
+          onChange={(event) => setMessage(event.target.value)}
+        />
+        <button type="submit">Send</button>
+      </form>
     </div>
   );
 };
