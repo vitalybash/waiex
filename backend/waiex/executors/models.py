@@ -91,9 +91,9 @@ class Skill(models.Model):  # Модель услуг
     stack = models.CharField(max_length=512, verbose_name='Стек технологии')
     price = models.IntegerField(default=0, verbose_name='Цена услуги')
 
-class File(models.Model):
+"""class File(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='files')
-    file = models.FileField(upload_to='files/order')
+    file = models.FileField(upload_to='files/order')"""
 
 class Order(models.Model):
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, related_name='order_customer')
