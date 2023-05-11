@@ -43,26 +43,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = [
-            'id',
-            'customer',
-            'executor',
-            'title',
-            'description',
-            'kind',
-            'stack',
-            'price',
-            'deadline',
-            'status',
-            'files',
-        ]
-
-    def create(self, validated_data):
-        files_data = self.context('files')
-        order = Order.objects.create(**validated_data)
-        for file_data in files_data:
-            File.objects.create(order=order, file=file_data)
-        return order
+        fields = '__all__'
 
 
 class RegistrationSerializer(serializers.ModelSerializer):

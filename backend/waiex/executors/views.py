@@ -74,24 +74,6 @@ class OrderViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(kind__contains=kind)  # фильтрация по типу заказа
         return queryset
 
-    def create(self, request, *args, **kwargs):
-        files = request.FILES.getlist('files', None)
-        data = {
-            'customer': request.POST.get('customer', None),
-            "title": request.POST.get('title', None),
-            "description": request.POST.get('description', None),
-            "stack": request.POST.get('title', None),
-            "price": request.POST.get('price', None),
-            "deadline": request.POST.get('deadline', None),
-            "status": request.POST.get('status', None),
-        }
-        _serializer = self.serializer_class(data=data, context={'files': files})
-        if _serializer.is_valid():
-            _serializer.save()
-            return Response(data=_serializer.data, status=status.HTTP_201_CREATED)  # NOQA
-        else:
-            return Response(data=_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
     @action(methods=['get'], detail=True)
     def get_users_order(self, request, pk=None):
         queryset = Order.objects.filter(customer=pk)

@@ -99,15 +99,16 @@ class Order(models.Model):
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, related_name='order_customer')
     executor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, related_name='order_executor')
 
-    title = models.CharField(max_length=256, null=True, verbose_name='Заголовок заказа')
-    description = models.TextField(max_length=1024, null=True, verbose_name='Описание заказа')
-    kind = models.CharField(max_length=256, null=True, verbose_name='Тип заказа')  # тип это тг бот/сайт/игра/скрипт и др.
+    title = models.CharField(max_length=256, verbose_name='Заголовок заказа')
+    description = models.TextField(max_length=1024, verbose_name='Описание заказа')
+    kind = models.CharField(max_length=256, blank=True ,verbose_name='Тип заказа')  # тип это тг бот/сайт/игра/скрипт и др.
     # заполняется нейронкой
 
-    stack = models.CharField(max_length=512, null=True, verbose_name='Стек технологии')
-    price = models.IntegerField(default=0, null=True, blank=True, verbose_name='Цена услуги')
-    deadline = models.IntegerField(default=0, null=True, verbose_name='Срок выполнения заказа')
-    status = models.CharField(max_length=64, null=True, verbose_name='Статус заказа')  # создан/в работе/завершен/истек срок
+    stack = models.CharField(max_length=512, blank=True, verbose_name='Стек технологии')
+    price = models.IntegerField(default=0, blank=True, verbose_name='Цена услуги')
+    deadline = models.CharField(max_length=64 ,default='Не указано', null=True, verbose_name='Срок выполнения заказа')
+    status = models.CharField(max_length=32, default='Создан', verbose_name='Статус заказа')  # создан/в работе/завершен/истек срок
+    file = models.FileField(upload_to='files/order', blank=True)
 
 
 
