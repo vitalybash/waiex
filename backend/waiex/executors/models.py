@@ -91,9 +91,9 @@ class Skill(models.Model):  # Модель услуг
     stack = models.CharField(max_length=512, verbose_name='Стек технологии')
     price = models.IntegerField(default=0, verbose_name='Цена услуги')
 
-"""class File(models.Model):
-    order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='files')
-    file = models.FileField(upload_to='files/order')"""
+class File(models.Model):
+    file_name = models.CharField(max_length=128)
+    file = models.FileField(upload_to='files/order')
 
 class Order(models.Model):
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, related_name='order_customer')
@@ -108,7 +108,7 @@ class Order(models.Model):
     price = models.IntegerField(default=0, blank=True, verbose_name='Цена услуги')
     deadline = models.CharField(max_length=64 ,default='Не указано', null=True, verbose_name='Срок выполнения заказа')
     status = models.CharField(max_length=32, default='Создан', verbose_name='Статус заказа')  # создан/в работе/завершен/истек срок
-    file = models.FileField(upload_to='files/order', blank=True)
+    file = models.ManyToManyField('File', blank=True)
 
 
 
