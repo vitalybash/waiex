@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Skill, CustomUser, Reviews, Order, File
+from .models import Skill, CustomUser, Reviews, Order
 from django.contrib.auth import authenticate
 
 
@@ -33,13 +33,12 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Reviews
         fields = "__all__"
 
-class FileSerializer(serializers.ModelSerializer):
+'''class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = ('id', 'file')
+        fields = ('id', 'file')'''
 
 class OrderSerializer(serializers.ModelSerializer):
-    files = FileSerializer(many=True)
 
     class Meta:
         model = Order
