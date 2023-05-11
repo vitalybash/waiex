@@ -9,7 +9,11 @@ import axios from "axios";
 const OrderForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [files, setFiles] = useState([]);
+  const [file, setFile] = useState({
+    title: "",
+    description: "",
+    image_url: "",
+  });
   const [stack, setStack] = useState([]);
   const [budget, setBudget] = useState("");
   const [deadline, setDeadline] = useState("");
@@ -38,9 +42,9 @@ const OrderForm = () => {
     //   formData.append('files', file);
     // })
 
-    formData.append("files", files);
+    formData.append("file", file.image_url);
 
-    console.log(formData.get('files'))
+    console.log(formData.get('file'))
 
 
     // formData.append("files", [
@@ -48,27 +52,17 @@ const OrderForm = () => {
 
     axios.post("http://localhost:8000/orders/", formData, {
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "multipart/form-data"
       }
     }).then(res => {
       console.log(res.data);
     })
   }
 
-  const handleUploadFiles = files => {
-    const uploaded = [...files];
-    files.some(file => {
-      if (uploaded.findIndex(f => f.name === file.name) === -1) {
-        uploaded.push(file);
-      }
-    })
-
-    setFiles(uploaded);
-  }
-
   const handleFilesChange = e => {
-    const chosenFiles = Array.prototype.slice.call(e.target.files);
-    handleUploadFiles(chosenFiles);
+    let newFile = { ...file };
+    newFile["image_url"] = e.target.files[0];
+    setFile(newFile);
   }
 
   return (
