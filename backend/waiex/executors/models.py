@@ -92,7 +92,7 @@ class Skill(models.Model):  # Модель услуг
     price = models.IntegerField(default=0, verbose_name='Цена услуги')
 
 class File(models.Model):
-    order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='file')
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='files')
     file = models.FileField(upload_to='files/order')
 
 class Order(models.Model):
@@ -105,11 +105,9 @@ class Order(models.Model):
     # заполняется нейронкой
 
     stack = models.CharField(max_length=512, null=True, verbose_name='Стек технологии')
-    price = models.IntegerField(default=0, null=True, verbose_name='Цена услуги')
+    price = models.IntegerField(default=0, null=True, blank=True, verbose_name='Цена услуги')
     deadline = models.IntegerField(default=0, null=True, verbose_name='Срок выполнения заказа')
-    status = models.CharField(max_length=512, null=True, verbose_name='Статус заказа')  # создан/в работе/завершен/истек срок
-    # размещения
-    files = models.ManyToManyField(File, blank=True, related_name='order_files')
+    status = models.CharField(max_length=64, null=True, verbose_name='Статус заказа')  # создан/в работе/завершен/истек срок
 
 
 
