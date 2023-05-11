@@ -16,7 +16,6 @@ const OrderForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(title, description, files, stack)
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -30,9 +29,18 @@ const OrderForm = () => {
     formData.append("executor", 1);
 
 
-    files.forEach(file => {
-      formData.append('files', file);
-    })
+
+    //
+    // for (let i = 0; i < files.length; i++) {
+    //   formData.append('files', files[0]);
+    // }
+    // files.forEach(file => {
+    //   formData.append('files', file);
+    // })
+
+    formData.append("files", files);
+
+    console.log(formData.get('files'))
 
 
     // formData.append("files", [
@@ -40,7 +48,7 @@ const OrderForm = () => {
 
     axios.post("http://localhost:8000/orders/", formData, {
       headers: {
-        'content-type': 'multipart/form-data'
+        'Content-Type': 'application/json'
       }
     }).then(res => {
       console.log(res.data);
