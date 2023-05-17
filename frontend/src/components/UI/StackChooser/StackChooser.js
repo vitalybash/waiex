@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react';
 import "./StackChooser.css";
 import StackItem from "../StackItem/StackItem";
 
-const StackChooser = () => {
-  const [stack, setStack] = useState([]);
+const StackChooser = ({stack, setStack}) => {
   const [isInput, setIsInput] = useState(false);
 
   const addEl = e => {
@@ -16,7 +15,6 @@ const StackChooser = () => {
   }
 
   const removeEl = id => {
-    console.log(id);
     setStack(prevState => prevState.filter((el, el_id) => el_id !== id));
   }
 
