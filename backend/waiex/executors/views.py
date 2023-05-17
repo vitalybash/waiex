@@ -123,3 +123,26 @@ class LoginAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+def ctreate_order(request):
+    customer = request.query_params.get('customer')
+    title = request.query_params.get('title')
+    description = request.query_params.get('description')
+    kind = request.query_params.get('kind')
+    stack = request.query_params.get('stack')
+    price = request.query_params.get('price')
+    deadline = request.query_params.get('deadline')
+    file = request.query_params.get('file')
+    files = File.objects.filter(file_name=file)
+    order = Order.create(
+        customer = CustomUser.get(id=customer),
+        title = title,
+        description = description,
+        kind = kind,
+        stack = stack,
+        price = price,
+        deadline = deadline,
+    )
+    for i in files:
+        order.add(i)
+        order.save()
+
