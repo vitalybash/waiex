@@ -25,26 +25,30 @@ const OrderForm = () => {
 
     const filename = nanoid(32);
     files.forEach(file => {
-      FileService.uploadFile(filename, file).then(r => {
-        setFilesIndexes(prev => [...prev, r.data.id]);
-      });
+      FileService.uploadFile(filename, file).then(r => {});
     });
 
     let formData = new FormData()
-    formData.append("customer", user.email);
+    formData.append("customer", 1);
     formData.append("title", title);
-    formData.append("desctiption", description);
-    formData.append("files", filesIndexes);
+    formData.append("description", description);
 
-    axios.post(`http://127.0.0.1:8000/create_order/`, formData,
+    [1, 2].forEach(i => {
+      formData.append("file", i);
+    })
+
+    formData.append("stack", stack.join(";"));
+    formData.append("deadline", deadline);
+    formData.append("price", 0);
+
+    console.log(formData)
+
+    axios.post(`http://127.0.0.1:8000/orders/`, formData,
       {
         headers: {
           "Content-Type": "application/json",
         }
       })
-
-    // axios.post(`http://127.0.0.1:8000/create_order?customer=${user.username};title=${title};description=${description};file=${filename}/`
-    //     ).then(r => console.log(r))
   }
 
   const handleFilesChange = e => {

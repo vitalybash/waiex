@@ -66,10 +66,10 @@ class OrderSerializer(serializers.ModelSerializer):
             kind='12231',
             deadline=deadline,
             price=price,
-            customer=CustomUser.objects.get(email=customer),
+            customer=customer,
         )
         for i in file:
-            order.file.add(File.objects.get(id=i))
+            order.file.add(i)
             order.save()
         return order
 

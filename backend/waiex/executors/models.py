@@ -106,7 +106,7 @@ class Order(models.Model):
 
     stack = models.CharField(max_length=512, blank=True, null=True,verbose_name='Стек технологии')
     price = models.IntegerField(default=0, blank=True, null=True,verbose_name='Цена услуги')
-    deadline = models.CharField(max_length=64 ,default='Не указано', null=True, verbose_name='Срок выполнения заказа')
+    deadline = models.CharField(max_length=64, default='Не указано',blank=True, null=True, verbose_name='Срок выполнения заказа')
     status = models.CharField(max_length=32, default='Создан', verbose_name='Статус заказа')  # создан/в работе/завершен/истек срок
     file = models.ManyToManyField('File', blank=True, null=True,)
 
