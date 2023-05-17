@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 
 class SkillSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(max_length=None, use_url=True)
+
     class Meta:
         model = Skill
         fields = "__all__"
@@ -33,16 +34,44 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Reviews
         fields = "__all__"
 
+
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
         fields = "__all__"
 
-class OrderSerializer(serializers.ModelSerializer):
 
+class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = '__all__'
+
+    def create(self, validated_data):
+        print(validated_data)
+        title = validated_data['title']
+        description = validated_data['description']
+        stack = validated_data['stack']
+        deadline = validated_data['deadline']
+        price = validated_data['price']
+        customer = validated_data['customer']
+        file = validated_data['file']
+        if price == None:
+            price = 0
+        if deadline == None:
+            deadline = 'Не указано'
+        order = Order.objects.create(
+            title=title,
+            description=description,
+            stack=stack,
+            kind='12231',
+            deadline=deadline,
+            price=price,
+            customer=CustomUser.objects.get(email=customer),
+        )
+        for i in file:
+            order.file.add(File.objects.get(id=i))
+            order.save()
+        return order
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
