@@ -5,64 +5,38 @@ import "./OrderForm.css";
 import FileInput from "../UI/FileInput/FileInput";
 import StackChooser from "../UI/StackChooser/StackChooser";
 import axios from "axios";
+import { nanoid } from "nanoid";
+import FileService from "../../services/FileService";
+import { useSelector } from "react-redux";
 
 const OrderForm = () => {
+  const { user } = useSelector((state) => state.auth);
+
+  console.log(user);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [file, setFile] = useState({
-    title: "",
-    description: "",
-    image_url: "",
-  });
+  const [files, setFiles] = useState([]);
   const [stack, setStack] = useState([]);
   const [budget, setBudget] = useState("");
   const [deadline, setDeadline] = useState("");
 
   const onSubmit = e => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("stack", stack.join(";"));
-    formData.append("deadline", 123);
 
-    formData.append("kind", "test");
-    formData.append("price", 1);
-    formData.append("status", "test");
-    formData.append("customer", 1)
-    formData.append("executor", 1);
-
-
-
-    //
-    // for (let i = 0; i < files.length; i++) {
-    //   formData.append('files', files[0]);
-    // }
-    // files.forEach(file => {
-    //   formData.append('files', file);
-    // })
-
-    formData.append("file", file.image_url);
-
-    console.log(formData.get('file'))
-
-
-    // formData.append("files", [
-    // ]);
-
-    axios.post("http://localhost:8000/orders/", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    }).then(res => {
-      console.log(res.data);
+    const filename = nanoid(32);
+    files.forEach(file => {
+       FileService.uploadFile(filename, file).then(r => console.log(r));
     })
+
+    axios.post(`http://127.0.0.1:8000/create_order?customer=${user.username};title=${title};description=${description};file=${filename}/`
+        ).then(r => console.log(r))
   }
 
   const handleFilesChange = e => {
-    let newFile = { ...file };
-    newFile["image_url"] = e.target.files[0];
-    setFile(newFile);
+    setFiles(e.target.files);
+    const chosenFiles = Array.prototype.slice.call(e.target.files)
+    setFiles(chosenFiles);
   }
 
   return (
