@@ -1,7 +1,10 @@
 import json
 import os
 import django
+
 from django.conf import settings
+from django.http import HttpResponse
+from django.views import View
 from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
@@ -65,12 +68,13 @@ class OrderViewSet(viewsets.ModelViewSet):
         if title != None:
             queryset = queryset.filter(title__contains=title)  # фильтрация по наличию искомой фразы в названии заказа
         if stack != None:
-            queryset = queryset.filter(stack__contains=stack)# фильтрация по стеку услуги(временно только 1 значение)
+            queryset = queryset.filter(stack__contains=stack)  # фильтрация по стеку услуги(временно только 1 значение)
         if price != None:
             price = tuple(map(int, price.split('-')))
-            queryset = queryset.filter(price__range=price)# фильтрация по диапазону цен(временно только 1 диапазон формата (min, max) )
+            queryset = queryset.filter(
+                price__range=price)  # фильтрация по диапазону цен(временно только 1 диапазон формата (min, max) )
         if kind != None:
-            queryset = queryset.filter(kind__contains=kind)# фильтрация по типу заказа
+            queryset = queryset.filter(kind__contains=kind)  # фильтрация по типу заказа
         return queryset
 
     @action(methods=['get'], detail=True)
@@ -120,3 +124,4 @@ class LoginAPIView(APIView):
         serializer.is_valid(raise_exception=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
