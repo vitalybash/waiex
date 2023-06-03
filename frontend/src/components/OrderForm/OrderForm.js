@@ -12,25 +12,43 @@ import { useSelector } from "react-redux";
 const OrderForm = () => {
   const { user } = useSelector((state) => state.auth);
 
-  console.log(user);
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState([]);
   const [stack, setStack] = useState([]);
   const [budget, setBudget] = useState("");
   const [deadline, setDeadline] = useState("");
+  const [filesIndexes, setFilesIndexes] = useState([]);
 
-  const onSubmit = e => {
+  function onSubmit(e) {
     e.preventDefault();
 
     const filename = nanoid(32);
     files.forEach(file => {
-       FileService.uploadFile(filename, file).then(r => console.log(r));
+      FileService.uploadFile(filename, file).then(r => {});
+    });
+
+    let formData = new FormData()
+    formData.append("customer", 1);
+    formData.append("title", title);
+    formData.append("description", description);
+
+    [1, 2].forEach(i => {
+      formData.append("file", i);
     })
 
-    axios.post(`http://127.0.0.1:8000/create_order?customer=${user.username};title=${title};description=${description};file=${filename}/`
-        ).then(r => console.log(r))
+    formData.append("stack", stack.join(";"));
+    formData.append("deadline", deadline);
+    formData.append("price", 0);
+
+    console.log(formData)
+
+    axios.post(`http://127.0.0.1:8000/orders/`, formData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      })
   }
 
   const handleFilesChange = e => {
@@ -43,13 +61,13 @@ const OrderForm = () => {
     <form onSubmit={onSubmit} className="centered">
       <h2>Создание заказа</h2>
       <MyInput placeholder="Название" id="title"
-                onChange={(e) => setTitle(e.target.value)}
+               onChange={(e) => setTitle(e.target.value)}
       />
       <MyTextArea placeholder="Что вы хотите получить?"
                   onChange={(e) => setDescription(e.target.value)}
       />
-      <FileInput type="file" id="file" name="file" multiple onChange={handleFilesChange} />
-      <StackChooser stack={stack} setStack={setStack} />
+      <FileInput type="file" id="file" name="file" multiple onChange={handleFilesChange}/>
+      <StackChooser stack={stack} setStack={setStack}/>
       <div className="numerous-container">
         <MyInput placeholder="Бюджет" id="budget" name="budget"
                  onChange={(e) => setBudget(e.target.value)}

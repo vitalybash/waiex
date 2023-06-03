@@ -24,6 +24,10 @@ from rest_framework import routers, permissions
 from executors.views import SkillsViewSet, UserViewSet, ReviewViewSet, OrderViewSet, RegistrationAPIView, FileViewSet, \
     VerifyEmail
 from chat.views import ChatViewSet
+# from .views import MessageList
+from executors.views import SkillsViewSet, UserViewSet, ReviewViewSet, OrderViewSet, RegistrationAPIView, FileViewSet
+from chat.views import ChatViewSet, MessageList
+from chat import routing
 
 router = routers.DefaultRouter()
 router.register(r'skills', SkillsViewSet, 'foobar-detail')
@@ -53,7 +57,9 @@ urlpatterns = [
                   path('orders/<int:pk>/user_order/', OrderViewSet.as_view({'get': 'get_users_order'})),
                   path('skills/<int:pk>/user_skill/', SkillsViewSet.as_view({'get': 'get_users_skills'})),
                   path('registration/', include('executors.urls', namespace='authentication')),
-                  path('email-verify/', VerifyEmail.as_view(), name="email-verify")
+                  path('email-verify/', VerifyEmail.as_view(), name="email-verify"),
+                  path('messages/', MessageList.as_view()),
+                  path('ws/', include(routing.websocket_urlpatterns)),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += router.urls
