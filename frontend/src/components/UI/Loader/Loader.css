@@ -5,7 +5,6 @@
     border: 3px dashed #ababab;
     animation: rotate 5s infinite;
     margin-inline: auto;
-    margin-top: 4rem;
     z-index: 2;
 }
 
