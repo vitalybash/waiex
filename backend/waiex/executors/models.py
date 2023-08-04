@@ -13,7 +13,7 @@ from executors.managers import CustomUserManager
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(default='', verbose_name='Почта пользователя', unique=True)
     password = models.CharField(default='', max_length=1024)
-    avatar = models.ImageField(upload_to='avatar', verbose_name='аватар пользователя')
+    avatar = models.ImageField(upload_to='avatar', verbose_name='аватар пользователя', blank=True)
     username = models.CharField(max_length=256, default='', verbose_name='Короткое имя исполнителя')
     name = models.CharField(max_length=256, default='', verbose_name='Имя исполнителя')
     surname = models.CharField(max_length=256, default='', verbose_name='Фамилия исполнителя')
@@ -109,6 +109,7 @@ class Order(models.Model):
     deadline = models.CharField(max_length=64, default='Не указано',blank=True, null=True, verbose_name='Срок выполнения заказа')
     status = models.CharField(max_length=32, default='Создан', verbose_name='Статус заказа')  # создан/в работе/завершен/истек срок
     file = models.ManyToManyField('File', blank=True, null=True,)
+    is_verified = models.BooleanField(default=False)
 
 
 

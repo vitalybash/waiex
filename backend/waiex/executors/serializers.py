@@ -63,7 +63,6 @@ class OrderSerializer(serializers.ModelSerializer):
             title=title,
             description=description,
             stack=stack,
-            kind='12231',
             deadline=deadline,
             price=price,
             customer=customer,
@@ -100,6 +99,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
         # написали ранее, для создания нового пользователя.
         return CustomUser.objects.create_user(**validated_data)
 
+class EmailVerificationSerializer(serializers.ModelSerializer):
+    token = serializers.CharField(max_length=555)
+    class Meta:
+        model = CustomUser
+        fields = ['token']
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)
