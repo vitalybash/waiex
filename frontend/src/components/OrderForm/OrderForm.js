@@ -24,31 +24,38 @@ const OrderForm = () => {
     e.preventDefault();
 
     const filename = nanoid(32);
+    let promises = [];
+    let ids = [];
     files.forEach(file => {
-      FileService.uploadFile(filename, file).then(r => {});
+      promises.push(FileService.uploadFile(filename, file).then(r => {
+        ids.push(r.data.id);
+      }));
     });
 
     let formData = new FormData()
     formData.append("customer", 1);
     formData.append("title", title);
     formData.append("description", description);
-
-    [1, 2].forEach(i => {
-      formData.append("file", i);
-    })
-
     formData.append("stack", stack.join(";"));
     formData.append("deadline", deadline);
     formData.append("price", 0);
 
-    console.log(formData)
+    Promise.all(promises).then(r => {
+      if (ids.length < 2) {
+        formData.append("file", JSON.stringify(ids));
+      } else {
+        ids.forEach(i => {
+          formData.append("file", i);
+        })
+      }
 
-    axios.post(`http://127.0.0.1:8000/orders/`, formData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        }
-      })
+      axios.post(`http://127.0.0.1:8000/orders/`, formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          }
+        }).then(r => console.log(r));
+    })
   }
 
   const handleFilesChange = e => {
@@ -58,7 +65,7 @@ const OrderForm = () => {
   }
 
   return (
-    <form onSubmit={onSubmit} className="centered">
+    <form onSubmit={onSubmit} className="centered order">
       <h2>Создание заказа</h2>
       <MyInput placeholder="Название" id="title"
                onChange={(e) => setTitle(e.target.value)}
@@ -76,7 +83,7 @@ const OrderForm = () => {
                  onChange={(e) => setDeadline(e.target.value)}
         />
       </div>
-      <button>Создать заказ</button>
+      <button className="centered shadow my-input">Создать заказ</button>
     </form>
   );
 };
