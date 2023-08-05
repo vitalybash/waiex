@@ -10,7 +10,6 @@
 
 .modal-form > div {
     margin-top: 2rem;
-    margin-bottom: 2rem;
     display: flex;
     justify-content: right;
     gap: 24px;
@@ -28,10 +27,15 @@
     max-width: 50%;
 }
 
+.modal-form > p {
+    margin-top: 1rem;
+}
+
 .modal-form p > a {
     margin-left: 4px;
     font-size: 1rem;
     cursor: pointer;
+    color: #2aabd2;
 }
 
 .modal-form a {

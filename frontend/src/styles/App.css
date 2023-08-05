@@ -76,3 +76,9 @@ a {
     background-color: #2d97c2;
     color: #fff;
 }
+
+.error-text {
+    color: #ff4444;
+    font-family: "Times New Roman", sans-serif;
+    text-align: center;
+}

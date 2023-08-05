@@ -19,10 +19,16 @@ const Skills = () => {
 
   return (
     <section className="services">
-      <MyInput id="searchbar" placeholder="Название профессии..."/>
       {areServicesLoading
         ? <Loader/>
-        : <ServicesGrid skills={skills}/>
+        :
+        <>
+          {!servicesError && <MyInput id="searchbar" placeholder="Название..."/>}
+          <ServicesGrid skills={skills}/>
+        </>
+      }
+      {
+        servicesError && <h2 className="error-text">Error: {servicesError}</h2>
       }
     </section>
   );
