@@ -74,43 +74,49 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Reviews(models.Model):  # Модель отзывов
-    user_from = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.CASCADE, related_name='review_author',
+    user_from = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.CASCADE,
+                                  related_name='review_author',
                                   verbose_name='Автор отзыва')
     user_to = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.CASCADE, related_name='user_to',
-                                   verbose_name='Адресат отзыва')
+                                verbose_name='Адресат отзыва')
     text = models.CharField(max_length=5096, verbose_name='Текст отзыва')
     estimation = models.IntegerField(default=0, verbose_name='Оценка')
 
 
 class Skill(models.Model):  # Модель услуг
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='card_author',
-                              verbose_name='Автор карточки')
+                               verbose_name='Автор карточки')
     image = models.ImageField(upload_to='image', verbose_name='фотография услуги')
     title = models.CharField(max_length=256, verbose_name='Заголовок услуги')
     description = models.TextField(max_length=1024, verbose_name='Описание услуги')
     stack = models.CharField(max_length=512, verbose_name='Стек технологии')
     price = models.IntegerField(default=0, verbose_name='Цена услуги')
 
+
 class File(models.Model):
     file_name = models.CharField(max_length=128)
     file = models.FileField(upload_to='files/order')
 
+
 class Order(models.Model):
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, related_name='order_customer')
-    executor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, null=True, related_name='order_executor')
+    executor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None, null=True,
+                                 related_name='order_executor')
 
     title = models.CharField(max_length=256, verbose_name='Заголовок заказа')
     description = models.TextField(max_length=1024, verbose_name='Описание заказа')
-    kind = models.CharField(max_length=256, blank=True, null=True,verbose_name='Тип заказа')  # тип это тг бот/сайт/игра/скрипт и др.
+    kind = models.CharField(max_length=256, blank=True, null=True,
+                            verbose_name='Тип заказа')  # тип это тг бот/сайт/игра/скрипт и др.
     # заполняется нейронкой
 
-    stack = models.CharField(max_length=512, blank=True, null=True,verbose_name='Стек технологии')
-    price = models.IntegerField(default=0, blank=True, null=True,verbose_name='Цена услуги')
-    deadline = models.CharField(max_length=64, default='Не указано',blank=True, null=True, verbose_name='Срок выполнения заказа')
-    status = models.CharField(max_length=32, default='Создан', verbose_name='Статус заказа')  # создан/в работе/завершен/истек срок
-    file = models.ManyToManyField('File', blank=True, null=True,)
+    stack = models.CharField(max_length=512, blank=True, null=True, verbose_name='Стек технологии')
+    price = models.IntegerField(default=0, blank=True, null=True, verbose_name='Цена услуги')
+    deadline = models.CharField(max_length=64, default='Не указано', blank=True, null=True,
+                                verbose_name='Срок выполнения заказа')
+    status = models.CharField(max_length=32, default='Создан',
+                              verbose_name='Статус заказа')  # создан/в работе/завершен/истек срок
+    file = models.ManyToManyField('File', blank=True, null=True, )
     is_verified = models.BooleanField(default=False)
-
 
 
 class UserManager(BaseUserManager):
